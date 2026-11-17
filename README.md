@@ -35,3 +35,10 @@ handle that outside this library.
 - **More rails than characters** is allowed; the extra rails simply stay empty.
 - **Non-letter characters** are removed, so `encode('Hello!', 3)` is the same as
   `encode('HELLO', 3)`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
